@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In — DOCTOR CONNECT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --primary: #0284c7; --primary-dark: #0369a1; --accent: #06b6d4; --text: #1e293b; --text-muted: #64748b; --border: #e2e8f0; --bg: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; }
+
+        .topbar { background: rgba(255,255,255,0.95); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon { width: 36px; height: 36px; background: linear-gradient(135deg,#0284c7,#06b6d4); border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+        .brand-icon i { color: #fff; font-size: 1rem; }
+        .brand-text { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); }
+        .brand-text span { color: var(--accent); }
+        .back-link { color: var(--text-muted); font-size: 0.875rem; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+        .back-link:hover { color: var(--primary); }
+
+        .notice { background: #fef3c7; border-bottom: 1px solid #fcd34d; padding: 10px 2rem; text-align: center; font-size: 0.85rem; color: #92400e; }
+        .notice strong { color: #78350f; }
+
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 1rem; }
+        .card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 8px 32px rgba(2,132,199,0.10); }
+        .card-header { text-align: center; margin-bottom: 32px; }
+        .card-icon { width: 60px; height: 60px; background: linear-gradient(135deg,#0284c7,#06b6d4); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .card-icon i { color: #fff; font-size: 1.4rem; }
+        .card h1 { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
+        input[type=email], input[type=password], input[type=text] {
+            width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border);
+            border-radius: 10px; font-size: 0.9rem; font-family: inherit;
+            color: var(--text); background: var(--bg); transition: border .2s;
+        }
+        input:focus { outline: none; border-color: var(--primary); background: #fff; }
+
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; border-radius: 11px; font-weight: 700; font-size: 0.95rem; cursor: pointer; border: none; transition: all .2s; margin-top: 6px; text-decoration: none; }
+        .btn-primary { background: linear-gradient(135deg,#0284c7,#06b6d4); color: #fff; }
+        .btn-primary:hover { background: linear-gradient(135deg,#0369a1,#0891b2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(2,132,199,0.3); }
+
+        .divider { text-align: center; margin: 20px 0; font-size: 0.82rem; color: var(--text-muted); position: relative; }
+        .divider::before, .divider::after { content:''; position:absolute; top:50%; width:40%; height:1px; background:var(--border); }
+        .divider::before { left:0; } .divider::after { right:0; }
+
+        .creds-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .creds-box h4 { font-size: 0.8rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 10px; }
+        .cred-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 0.78rem; border-bottom: 1px solid #e0f2fe; }
+        .cred-row:last-child { border-bottom: none; }
+        .cred-role { font-weight: 600; color: var(--text); }
+        .cred-pass { font-family: monospace; color: var(--primary); background: rgba(2,132,199,0.08); padding: 2px 6px; border-radius: 4px; }
+
+        .signup-link { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 20px; }
+        .signup-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .signup-link a:hover { text-decoration: underline; }
+
+        .xampp-warning { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 0.8rem; color: #92400e; text-align: center; }
+        .xampp-warning strong { display: block; margin-bottom: 4px; color: #78350f; }
+    </style>
+</head>
+<body>
+<div class="topbar">
+    <a href="../index.html" class="brand">
+        <div class="brand-icon"><i class="fas fa-stethoscope"></i></div>
+        <span class="brand-text">DOCTOR <span>CONNECT</span></span>
+    </a>
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</div>
+
+<div class="notice">
+    <strong>📌 GitHub Pages Preview</strong> — This is a static demo page. Actual login requires XAMPP running locally with MySQL.
+</div>
+
+<main>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon"><i class="fas fa-sign-in-alt"></i></div>
+            <h1>Welcome Back</h1>
+            <p>Sign in to your DOCTOR CONNECT account</p>
+        </div>
+
+        <!-- Quick fill credentials -->
+        <div class="creds-box">
+            <h4><i class="fas fa-key"></i> Quick Test Credentials (XAMPP only)</h4>
+            <div class="cred-row"><span class="cred-role">👤 Patient</span><span class="cred-pass">Patient@123</span></div>
+            <div class="cred-row"><span class="cred-role">👨‍⚕️ Doctor</span><span class="cred-pass">Doctor@123</span></div>
+            <div class="cred-row"><span class="cred-role">🛡️ Admin</span><span class="cred-pass">Admin@123</span></div>
+        </div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrap">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="you@example.com" value="john.doe@example.com">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrap">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Enter your password" value="Patient@123">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+        </form>
+
+        <div class="xampp-warning">
+            <strong>⚠️ XAMPP Required</strong>
+            Login requires PHP + MySQL. Start XAMPP and open <code>localhost/doctorconnected/</code> to use the full app.
+        </div>
+
+        <div class="signup-link">
+            Don't have an account? <a href="register.html">Create one free</a>
+        </div>
+    </div>
+</main>
+
+<script>
+function handleLogin(e) {
+    e.preventDefault();
+    alert('⚠️ Login requires XAMPP + MySQL running locally.\n\nTo use the full app:\n1. Install XAMPP\n2. Place project in C:\\xampp\\htdocs\\doctorconnected\\\n3. Open localhost/doctorconnected/\n4. Use credentials shown on screen');
+}
+</script>
+</body>
+</html>
+
